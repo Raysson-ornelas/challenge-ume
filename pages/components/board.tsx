@@ -1,11 +1,19 @@
 import { GameContext } from "../contexts/gameContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Box, VStack, Grid } from "@chakra-ui/layout";
 import Square from "./squares";
 import Controlls from "./controlls";
+import { ArrowUpIcon, ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon} from '@chakra-ui/icons';
 
 export default function Board(){
-    const { squares, setSquares } = useContext(GameContext);
+    const { squares, setSquares, setCardinalPoints } = useContext(GameContext);
+    useEffect(() => {
+        squares.fill(null);
+        const newSqaures = [... squares];
+        newSqaures[20] = <ArrowUpIcon w={20} h={20}/>;
+        setSquares(newSqaures);
+        setCardinalPoints(0);
+    },[]);
     return(
         <>
         <VStack bg="gray.300" height="100vh">
@@ -17,8 +25,8 @@ export default function Board(){
                 ))}
                 </Grid>
             </VStack>
-            <VStack spacing={5} height="18vh" alignItems="center" justifyContent="center" >
-                <Controlls></Controlls>
+            <VStack spacing={5} height="18vh" alignItems="center" justifyContent="center">
+                <Controlls />
             </VStack>
         </Box>
         </VStack>

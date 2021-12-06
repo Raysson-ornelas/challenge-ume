@@ -6,9 +6,21 @@ export const GameContext = createContext();
 
 export default function GameContextProvider({ children }){
     const [ squares, setSquares ] = useState(Array(25).fill(null));
+    const [ cardinalPoints, setCardinalPoints ] = useState(0);
+    const [ inputText, setInputText ] = useState('');
+    const [ logErro, setLogErro ] =useState(0);
+    const state = {
+        squares,
+        setSquares,
+        cardinalPoints,
+        setCardinalPoints,
+        inputText,
+        setInputText,
+    }
+
     return(
         <>
-        <GameContext.Provider value = {{ squares, setSquares }}>{ children }</GameContext.Provider>
+        <GameContext.Provider value = {state}>{ children }</GameContext.Provider>
         </>
     );
 }
