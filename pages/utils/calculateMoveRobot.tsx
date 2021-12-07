@@ -106,7 +106,7 @@ export default function calculateMoveRobot( inputText, CardinalPoints, squaresIn
     let axleX = squaresPosition[squaresIndex].x;
     let axleY = squaresPosition[squaresIndex].y;
     for (let i = 0; i < inputText.length; i++){
-        if ((inputText[i] === 'M') || (inputText[i] === 'm')){
+        if ((inputText[i] === 'm')){
             if (calculateCardinalPoints === 0){
                 axleY += 1;
             }else
@@ -120,13 +120,13 @@ export default function calculateMoveRobot( inputText, CardinalPoints, squaresIn
                 axleX -= 1;
             }
         }else
-        if ((inputText[i] === 'L') || (inputText[i] === 'l')){
+        if ((inputText[i] === 'l')){
             calculateCardinalPoints -= 1;
             if (calculateCardinalPoints < 0){
                 calculateCardinalPoints = 3;
             }
         }else
-        if ((inputText[i] === 'R') || (inputText[i] === 'r')){
+        if ((inputText[i] === 'r')){
             calculateCardinalPoints += 1;
             if (calculateCardinalPoints > 3){
                 calculateCardinalPoints = 0;

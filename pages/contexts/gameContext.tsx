@@ -8,7 +8,6 @@ export default function GameContextProvider({ children }){
     const [ squares, setSquares ] = useState(Array(25).fill(null));
     const [ cardinalPoints, setCardinalPoints ] = useState(0);
     const [ inputText, setInputText ] = useState('');
-    const [ logErro, setLogErro ] =useState(0);
     const state = {
         squares,
         setSquares,

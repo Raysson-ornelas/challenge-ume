@@ -28,7 +28,7 @@ export default function Controlls(){
         squaresIndex = i;
       }
     }
-    let move = calculateMoveRobot(inputText, cardinalPoints, squaresIndex);
+    let move = calculateMoveRobot(inputText.toLowerCase(), cardinalPoints, squaresIndex);
     squares.fill(null);
     const newSqaures = [... squares];
     if (move['calculateCardinalPoints'] === 0){
