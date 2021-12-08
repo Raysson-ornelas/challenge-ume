@@ -21,7 +21,7 @@ export default function Board(){
             <VStack height="70vh" alignItems="center" justifyContent="center">
                 <Grid templateColumns='repeat(5,1fr)' gap={1}>
                 { squares.map((value, index) => (
-                    <Square value={value} index={index} />
+                    <Square value={value} key={0} index={index} />
                 ))}
                 </Grid>
             </VStack>
