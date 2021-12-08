@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/utils/calculateMoveRobot.js", "pages/contexts/gameContext.js", "pages/components/squares.js", "pages/components/controlls.js", "pages/components/board.js", "pages/index.js", "pages/_app.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/utils/calculateMoveRobot.js", "pages/contexts/gameContext.js", "pages/components/Squares.js", "pages/components/Controlls.js", "pages/components/Board.js", "pages/index.js", "pages/_app.js"],
   "exclude": ["node_modules"]
 }

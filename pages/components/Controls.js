@@ -1,18 +1,28 @@
 import { useContext } from 'react';
 import { GameContext } from '../contexts/gameContext';
-import { VStack, Input, Stack, Button} from '@chakra-ui/react';
+import { VStack, Input, Stack, Button, Alert, AlertIcon} from '@chakra-ui/react';
 import { ArrowUpIcon, ArrowBackIcon, ArrowDownIcon, ArrowForwardIcon} from '@chakra-ui/icons';
 import calculateMoveRobot from '../utils/calculateMoveRobot';
 
-export default function Controlls(){
-  const { squares, setSquares, cardinalPoints,setCardinalPoints, inputText, setInputText } = useContext(GameContext);
+
+export default function Controls(){
+  const { squares,
+          setSquares,
+          cardinalPoints,
+          setCardinalPoints,
+          inputText,
+          setInputText,
+          error,
+          setError,
+        } = useContext(GameContext);
 
   function handleResetClick(){
     squares.fill(null);
-    const newSqaures = [... squares];
-    newSqaures[20] = <ArrowUpIcon w={20} h={20}/>;
-    setSquares(newSqaures);
+    const newSquares = [... squares];
+    newSquares[20] = <ArrowUpIcon w={20} h={20}/>;
+    setSquares(newSquares);
     setCardinalPoints(0);
+    setError(false);
   }
 
   function onChange(ev){
@@ -28,27 +38,32 @@ export default function Controlls(){
         squaresIndex = i;
       }
     }
-    let move = calculateMoveRobot(inputText.toLowerCase(), cardinalPoints, squaresIndex);
+    const move = calculateMoveRobot(inputText.toLowerCase(), cardinalPoints, squaresIndex);
+    if (!move){
+      return setError(true);
+    }
     squares.fill(null);
-    const newSqaures = [... squares];
+    const newSquares = [... squares];
     if (move['calculateCardinalPoints'] === 0){
-      newSqaures[move['key']] = <ArrowUpIcon w={20} h={20}/>;
+      newSquares[move['key']] = <ArrowUpIcon w={20} h={20}/>;
     }else
     if (move['calculateCardinalPoints'] === 1){
-      newSqaures[move['key']] = <ArrowForwardIcon w={20} h={20}/>;
+      newSquares[move['key']] = <ArrowForwardIcon w={20} h={20}/>;
     }else
     if (move['calculateCardinalPoints'] === 2){
-      newSqaures[move['key']] = <ArrowDownIcon w={20} h={20}/>;
+      newSquares[move['key']] = <ArrowDownIcon w={20} h={20}/>;
     }else
     if (move['calculateCardinalPoints'] === 3){
-      newSqaures[move['key']] = <ArrowBackIcon w={20} h={20}/>;
+      newSquares[move['key']] = <ArrowBackIcon w={20} h={20}/>;
     }
-    setSquares(newSqaures);
+    setSquares(newSquares);
     setCardinalPoints(move['calculateCardinalPoints']);
+    setError(false);
   }
 
   return(
     <VStack spacing={5} height="18vh" alignItems="center" justifyContent="center">
+      {error &&(<Alert status='warning' borderRadius='5px' h='5vh'><AlertIcon/>Comando Inválido</Alert>)}
       <Input  width="20vw" mb={5} type="text" size="md" color="white" onChange={onChange}/>
       <Stack direction="row">
         <Button size="lg" variant="outline" color="white" _hover={{borderColor:'blue.500', color: 'blue.500'}} onClick={handleResetClick}>Reset</Button>
